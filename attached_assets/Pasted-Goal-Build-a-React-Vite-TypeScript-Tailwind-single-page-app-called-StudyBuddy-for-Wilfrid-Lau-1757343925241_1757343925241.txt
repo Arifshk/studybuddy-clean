@@ -1,0 +1,62 @@
+Goal: Build a React + Vite + TypeScript + Tailwind single-page app called StudyBuddy for Wilfrid Laurier University students to host/join public study sessions by course + building/floor (no GPS). Visualize core flows, with dummy data (no backend yet). Make it polished enough for screenshots.
+
+Tech & Setup
+	•	Stack: React (Vite, TS), Tailwind CSS.
+	•	Create routes with React Router: / (Landing), /app (Sessions), /host (Create Session), /donate, /moderate (read-only mock).
+	•	Use a simple state store (Context or Zustand) for demo data.
+
+Branding (Laurier)
+	•	Primary Purple: #4F2683
+	•	Golden Hawks Gold: #FFB81C
+	•	Neutral Dark: #0F1115
+	•	Neutral Light: #F5F6FA
+	•	Font: system UI (Inter if easy).
+	•	Logo placeholder: text “StudyBuddy” + tiny owl/eyes mark (monochrome).
+
+Pages & UX
+	1.	Landing (/)
+	•	Hero section: “Find a study group by course—on campus, in real time.”
+	•	Subtext: “Built for Wilfrid Laurier students. Privacy-first: building/floor only.”
+	•	CTA buttons: Browse sessions → /app, Host a session → /host
+	•	Footer: small note “Not affiliated with WLU • Beta”
+	2.	Sessions Directory (/app)
+	•	Top bar: logo (left), Filters (Course dropdown, Building dropdown, toggle “Public only”), right side ❤️ Donate button.
+	•	Two-column layout on desktop; single column mobile.
+	•	Session Cards (dummy data):
+	•	Course (e.g., BU111), Building (Library), Floor (2), Capacity (3/5), Ends in (1h 12m), Host (Josh S. initial avatar).
+	•	Buttons: Join, … menu → Report (opens modal).
+	•	Empty state if filters yield nothing: “No public sessions. Be the first to host!”
+	3.	Host a Session (/host)
+	•	Card UI with form fields:
+	•	Course (select with typeahead: BU111, CP102, EC120, MA103, ENTR200…)
+	•	Building (select: Library, Peters, Lazaridis Hall, Science, Arts, Athletic Complex)
+	•	Floor (select: 1–5), Area (optional select: Quiet Zone, Group Area)
+	•	Capacity (1–8), Duration (60/90/120 min), Notes (max 100 chars)
+	•	Toggle Public on by default
+	•	Create Session button → after submit, show a success screen previewing the session card and a Go to Sessions button.
+	•	No backend—store in memory for now.
+	4.	Report Modal (from any session card)
+	•	Fields: Reason (Spam, Harassment, Fake location, Inappropriate, Other), Details (max 300).
+	•	Submit → Toast: “Thanks — a moderator will review.” (Just console.log in demo.)
+	5.	Donate Page (/donate)
+	•	Simple “tip jar” page: copy, three buttons $3 / $5 / $10 (fake links), Custom.
+	•	Small text: “Optional tips keep StudyBuddy free for students.”
+	•	Include “Maybe later” link back to /app.
+	6.	Moderation Read-Only Mock (/moderate)
+	•	Table: sample reports with columns: Time, Target (UID/name initial), Reason, Status.
+	•	Action buttons disabled (grey) with tooltips “Admin only (demo).”
+
+Components to implement
+	•	FilterBar (course + building + public toggle)
+	•	SessionCard (with Join and Report)
+	•	CreateSessionForm
+	•	ReportModal
+	•	DonateModal (triggered occasionally; localStorage “snooze 7 days / don’t show again”)
+	•	Toast system
+	•	Badge and Pill UI elements (for course, capacity, timer)
+	•	Avatar with initials
+
+Dummy Data (seed in state)
+	•	Courses: ["BU111","CP102","EC120","MA103","DATA205","STAT231","PS101"]
+	•	Buildings: ["Library","Lazaridis Hall","Peters","Science","Arts","Athletic Complex"]
+	•	Sessions example objects (5–8 items):

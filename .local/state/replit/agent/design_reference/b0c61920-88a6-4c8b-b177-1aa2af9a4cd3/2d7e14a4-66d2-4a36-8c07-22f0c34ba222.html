@@ -1,0 +1,953 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBuddy - Find Study Groups at Wilfrid Laurier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                },
+                fontFamily: {
+                    sans: ['Inter', 'system-ui', 'sans-serif'],
+                }
+            },
+        }
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/index.js"></script>
+    <style>
+        :root {
+            --background: hsl(220 15% 97%);
+            --foreground: hsl(220 15% 9%);
+            --card: hsl(0 0% 100%);
+            --card-foreground: hsl(220 15% 9%);
+            --primary: hsl(262 52% 23%);
+            --primary-foreground: hsl(0 0% 100%);
+            --secondary: hsl(43 100% 56%);
+            --secondary-foreground: hsl(220 15% 9%);
+            --muted: hsl(220 15% 96%);
+            --muted-foreground: hsl(220 15% 45%);
+            --accent: hsl(43 100% 56%);
+            --accent-foreground: hsl(220 15% 9%);
+            --destructive: hsl(0 84% 60%);
+            --destructive-foreground: hsl(0 0% 100%);
+            --border: hsl(220 15% 90%);
+            --input: hsl(220 15% 90%);
+            --ring: hsl(262 52% 23%);
+            --radius: 8px;
+        }
+        
+        .laurier-purple { color: #4F2683; }
+        .laurier-gold { color: #FFB81C; }
+        .bg-laurier-purple { background-color: #4F2683; }
+        .bg-laurier-gold { background-color: #FFB81C; }
+        .border-laurier-purple { border-color: #4F2683; }
+        .text-laurier-purple { color: #4F2683; }
+        .text-laurier-gold { color: #FFB81C; }
+        
+        .progress-bar-bg {
+            background: linear-gradient(90deg, #4F2683 var(--progress, 0%), #e5e7eb var(--progress, 0%));
+        }
+        
+        .owl-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 40%, #4F2683 2px, transparent 2px),
+                        radial-gradient(circle at 70% 40%, #4F2683 2px, transparent 2px);
+            border: 2px solid #4F2683;
+            border-radius: 50% 50% 40% 40%;
+            position: relative;
+        }
+        
+        .owl-icon::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-top: 4px solid #4F2683;
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground font-sans">
+    <!-- Navigation -->
+    <nav class="bg-card border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="owl-icon"></div>
+                    <span class="text-xl font-bold text-primary">StudyBuddy</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#landing" class="text-muted-foreground hover:text-foreground transition-colors">Home</a>
+                    <a href="#sessions" class="text-muted-foreground hover:text-foreground transition-colors">Sessions</a>
+                    <a href="#host" class="text-muted-foreground hover:text-foreground transition-colors">Host</a>
+                    <a href="#donate" class="text-muted-foreground hover:text-foreground transition-colors">❤️ Donate</a>
+                    <button class="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:opacity-90 transition-opacity">Sign In</button>
+                </div>
+                <button class="md:hidden p-2 text-muted-foreground">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div id="landing" class="min-h-screen">
+        <!-- Hero Section -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-foreground mb-6">
+                    Find a study group by course—
+                    <span class="text-primary">on campus, in real time.</span>
+                </h1>
+                <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    Built for Wilfrid Laurier students. Privacy-first: building/floor only.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="showPage('sessions')" class="bg-primary text-primary-foreground px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity">
+                        Browse Sessions
+                    </button>
+                    <button onclick="showPage('host')" class="border border-primary text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors">
+                        Host a Session
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 px-4 sm:px-6 lg:px-8 bg-muted">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-primary rounded-lg mx-auto mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Find by Location</h3>
+                        <p class="text-muted-foreground">Browse study sessions by building and floor on campus</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-secondary rounded-lg mx-auto mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-secondary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Course-Specific</h3>
+                        <p class="text-muted-foreground">Filter by your exact course code to find relevant study groups</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-primary rounded-lg mx-auto mb-4 flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Privacy First</h3>
+                        <p class="text-muted-foreground">No GPS tracking - just building and floor for your safety</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sessions Directory -->
+    <div id="sessions" class="min-h-screen hidden">
+        <div class="py-8 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <!-- Header -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-foreground mb-2">Study Sessions</h1>
+                        <p class="text-muted-foreground">Join an active study group on campus</p>
+                    </div>
+                    <button onclick="showPage('donate')" class="mt-4 md:mt-0 bg-destructive text-destructive-foreground px-4 py-2 rounded-md hover:opacity-90 transition-opacity">
+                        ❤️ Donate
+                    </button>
+                </div>
+
+                <!-- Filters -->
+                <!-- @COMPONENT: FilterBar -->
+                <div class="bg-card rounded-lg border border-border p-6 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-2">Course</label>
+                            <select id="courseFilter" class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground" onchange="filterSessions()">
+                                <option value="">All Courses</option>
+                                <option value="BU111">BU111</option>
+                                <option value="CP102">CP102</option>
+                                <option value="EC120">EC120</option>
+                                <option value="MA103">MA103</option>
+                                <option value="DATA205">DATA205</option>
+                                <option value="STAT231">STAT231</option>
+                                <option value="PS101">PS101</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-2">Building</label>
+                            <select id="buildingFilter" class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground" onchange="filterSessions()">
+                                <option value="">All Buildings</option>
+                                <option value="Library">Library</option>
+                                <option value="Lazaridis Hall">Lazaridis Hall</option>
+                                <option value="Peters">Peters</option>
+                                <option value="Science">Science</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Athletic Complex">Athletic Complex</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-2">Floor</label>
+                            <select id="floorFilter" class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground" onchange="filterSessions()">
+                                <option value="">All Floors</option>
+                                <option value="1">Floor 1</option>
+                                <option value="2">Floor 2</option>
+                                <option value="3">Floor 3</option>
+                                <option value="4">Floor 4</option>
+                                <option value="5">Floor 5</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="publicFilter" checked class="rounded border-input text-primary focus:ring-primary" onchange="filterSessions()">
+                                <span class="text-sm font-medium text-foreground">Public only</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_COMPONENT: FilterBar -->
+
+                <!-- Sessions Grid -->
+                <div id="sessionsGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Session cards will be populated by JavaScript -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="text-center py-16 hidden">
+                    <div class="w-16 h-16 bg-muted rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-foreground mb-2">No public sessions found</h3>
+                    <p class="text-muted-foreground mb-4">Be the first to host a study session!</p>
+                    <button onclick="showPage('host')" class="bg-primary text-primary-foreground px-6 py-3 rounded-md hover:opacity-90 transition-opacity">
+                        Host a Session
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Host Session -->
+    <div id="host" class="min-h-screen hidden">
+        <div class="py-8 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-foreground mb-2">Host a Study Session</h1>
+                    <p class="text-muted-foreground">Create a new study group for your course</p>
+                </div>
+
+                <!-- @COMPONENT: CreateSessionForm -->
+                <div class="bg-card rounded-lg border border-border p-8">
+                    <form id="hostForm" onsubmit="createSession(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-2">Course Code *</label>
+                                <select required class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground">
+                                    <option value="">Select course...</option>
+                                    <option value="BU111">BU111 - Intro to Business</option>
+                                    <option value="CP102">CP102 - Computer Programming</option>
+                                    <option value="EC120">EC120 - Intro to Economics</option>
+                                    <option value="MA103">MA103 - Calculus I</option>
+                                    <option value="DATA205">DATA205 - Data Analytics</option>
+                                    <option value="STAT231">STAT231 - Statistics</option>
+                                    <option value="PS101">PS101 - Introduction to Psychology</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-2">Building *</label>
+                                <select required class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground">
+                                    <option value="">Select building...</option>
+                                    <option value="Library">Library</option>
+                                    <option value="Lazaridis Hall">Lazaridis Hall</option>
+                                    <option value="Peters">Peters Building</option>
+                                    <option value="Science">Science Building</option>
+                                    <option value="Arts">Arts Building</option>
+                                    <option value="Athletic Complex">Athletic Complex</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-2">Floor *</label>
+                                <select required class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground">
+                                    <option value="">Select floor...</option>
+                                    <option value="1">Floor 1</option>
+                                    <option value="2">Floor 2</option>
+                                    <option value="3">Floor 3</option>
+                                    <option value="4">Floor 4</option>
+                                    <option value="5">Floor 5</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-2">Area (Optional)</label>
+                                <select class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground">
+                                    <option value="">Select area...</option>
+                                    <option value="Quiet Zone">Quiet Zone</option>
+                                    <option value="Group Area">Group Study Area</option>
+                                    <option value="Computer Lab">Computer Lab</option>
+                                    <option value="Study Rooms">Study Rooms</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-2">Capacity *</label>
+                                <select required class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground">
+                                    <option value="">Select capacity...</option>
+                                    <option value="2">2 people</option>
+                                    <option value="3">3 people</option>
+                                    <option value="4">4 people</option>
+                                    <option value="5">5 people</option>
+                                    <option value="6">6 people</option>
+                                    <option value="7">7 people</option>
+                                    <option value="8">8 people</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-foreground mb-2">Duration *</label>
+                                <select required class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground">
+                                    <option value="">Select duration...</option>
+                                    <option value="60">60 minutes</option>
+                                    <option value="90">90 minutes</option>
+                                    <option value="120">120 minutes</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <label class="block text-sm font-medium text-foreground mb-2">Notes (Optional)</label>
+                            <textarea maxlength="100" placeholder="e.g., Case prep, quiet please..." rows="3" class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground resize-none"></textarea>
+                            <p class="text-xs text-muted-foreground mt-1">Max 100 characters</p>
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" checked class="rounded border-input text-primary focus:ring-primary">
+                                <span class="text-sm font-medium text-foreground">Make this session public</span>
+                            </label>
+                            <p class="text-xs text-muted-foreground mt-1">Public sessions are visible to all students</p>
+                        </div>
+
+                        <div class="mt-8 flex gap-4">
+                            <button type="submit" class="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold hover:opacity-90 transition-opacity">
+                                Create Session
+                            </button>
+                            <button type="button" onclick="showPage('sessions')" class="px-6 py-3 border border-border rounded-md text-foreground hover:bg-muted transition-colors">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- @END_COMPONENT: CreateSessionForm -->
+
+                <!-- Success State (initially hidden) -->
+                <div id="successState" class="bg-card rounded-lg border border-border p-8 hidden">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-foreground mb-2">Session Created!</h3>
+                        <p class="text-muted-foreground mb-6">Your study session is now live and visible to other students.</p>
+                        
+                        <!-- Preview of created session -->
+                        <div class="bg-muted rounded-lg p-4 mb-6" id="sessionPreview">
+                            <!-- Session preview will be populated by JavaScript -->
+                        </div>
+                        
+                        <button onclick="showPage('sessions')" class="bg-primary text-primary-foreground px-6 py-3 rounded-md font-semibold hover:opacity-90 transition-opacity">
+                            Go to Sessions
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donate Page -->
+    <div id="donate" class="min-h-screen hidden">
+        <div class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="mb-8">
+                    <div class="w-16 h-16 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <span class="text-2xl">❤️</span>
+                    </div>
+                    <h1 class="text-3xl font-bold text-foreground mb-4">Support StudyBuddy</h1>
+                    <p class="text-lg text-muted-foreground">Optional tips keep StudyBuddy free for students like you.</p>
+                </div>
+
+                <div class="bg-card rounded-lg border border-border p-8">
+                    <div class="grid grid-cols-3 gap-4 mb-6">
+                        <button class="bg-primary text-primary-foreground py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                            $3
+                        </button>
+                        <button class="bg-primary text-primary-foreground py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                            $5
+                        </button>
+                        <button class="bg-primary text-primary-foreground py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                            $10
+                        </button>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-foreground mb-2">Custom Amount</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">$</span>
+                            <input type="number" placeholder="0.00" min="1" step="0.01" class="w-full pl-8 pr-3 py-3 border border-input rounded-md bg-background text-foreground">
+                        </div>
+                    </div>
+                    
+                    <button class="w-full bg-secondary text-secondary-foreground py-3 rounded-md font-semibold hover:opacity-90 transition-opacity mb-4">
+                        Donate Now
+                    </button>
+                    
+                    <button onclick="showPage('sessions')" class="text-muted-foreground hover:text-foreground transition-colors">
+                        Maybe later
+                    </button>
+                </div>
+
+                <div class="mt-8 text-sm text-muted-foreground">
+                    <p>Your contribution helps us maintain servers, improve features, and keep StudyBuddy accessible to all Laurier students.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Moderation Page -->
+    <div id="moderate" class="min-h-screen hidden">
+        <div class="py-8 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-foreground mb-2">Moderation Dashboard</h1>
+                    <p class="text-muted-foreground">Review reported sessions and manage platform safety</p>
+                </div>
+
+                <div class="bg-card rounded-lg border border-border overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-muted">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Time</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Target</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Reason</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">2 hours ago</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-muted rounded-full flex items-center justify-center text-xs font-medium text-muted-foreground mr-3">
+                                                JS
+                                            </div>
+                                            <span class="text-sm text-foreground">Josh S. (BU111 - Library)</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">Inappropriate content</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                        <button disabled class="bg-muted text-muted-foreground px-3 py-1 rounded text-xs cursor-not-allowed" title="Admin only (demo)">
+                                            Review
+                                        </button>
+                                        <button disabled class="bg-muted text-muted-foreground px-3 py-1 rounded text-xs cursor-not-allowed" title="Admin only (demo)">
+                                            Dismiss
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">5 hours ago</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-muted rounded-full flex items-center justify-center text-xs font-medium text-muted-foreground mr-3">
+                                                EL
+                                            </div>
+                                            <span class="text-sm text-foreground">Emily L. (CP102 - Science)</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">Fake location</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Resolved</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                        <button disabled class="bg-muted text-muted-foreground px-3 py-1 rounded text-xs cursor-not-allowed" title="Admin only (demo)">
+                                            View
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">1 day ago</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-muted rounded-full flex items-center justify-center text-xs font-medium text-muted-foreground mr-3">
+                                                MK
+                                            </div>
+                                            <span class="text-sm text-foreground">Mike K. (MA103 - Peters)</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-foreground">Spam</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Removed</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
+                                        <button disabled class="bg-muted text-muted-foreground px-3 py-1 rounded text-xs cursor-not-allowed" title="Admin only (demo)">
+                                            View
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <!-- @COMPONENT: ReportModal -->
+    <div id="reportModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-card rounded-lg max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-foreground">Report Session</h3>
+                <button onclick="closeModal('reportModal')" class="text-muted-foreground hover:text-foreground">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form onsubmit="submitReport(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-foreground mb-2">Reason *</label>
+                    <select required class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground">
+                        <option value="">Select reason...</option>
+                        <option value="spam">Spam</option>
+                        <option value="harassment">Harassment</option>
+                        <option value="fake-location">Fake location</option>
+                        <option value="inappropriate">Inappropriate content</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-foreground mb-2">Details (Optional)</label>
+                    <textarea maxlength="300" placeholder="Please provide more details..." rows="4" class="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground resize-none"></textarea>
+                    <p class="text-xs text-muted-foreground mt-1">Max 300 characters</p>
+                </div>
+                
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-1 bg-destructive text-destructive-foreground px-4 py-2 rounded-md font-semibold hover:opacity-90 transition-opacity">
+                        Submit Report
+                    </button>
+                    <button type="button" onclick="closeModal('reportModal')" class="px-4 py-2 border border-border rounded-md text-foreground hover:bg-muted transition-colors">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: ReportModal -->
+
+    <!-- Donate Modal -->
+    <!-- @COMPONENT: DonateModal -->
+    <div id="donateModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-card rounded-lg max-w-md w-full p-6">
+            <div class="text-center">
+                <div class="w-12 h-12 bg-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <span class="text-xl">❤️</span>
+                </div>
+                <h3 class="text-lg font-semibold text-foreground mb-2">Enjoying StudyBuddy?</h3>
+                <p class="text-muted-foreground mb-6">Consider supporting us to keep the platform free for all students!</p>
+                
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                    <button class="bg-primary text-primary-foreground py-2 rounded-md font-medium hover:opacity-90 transition-opacity">
+                        $3
+                    </button>
+                    <button class="bg-primary text-primary-foreground py-2 rounded-md font-medium hover:opacity-90 transition-opacity">
+                        $5
+                    </button>
+                    <button class="bg-primary text-primary-foreground py-2 rounded-md font-medium hover:opacity-90 transition-opacity">
+                        $10
+                    </button>
+                </div>
+                
+                <div class="flex gap-3">
+                    <button onclick="snoozeDonate()" class="flex-1 px-4 py-2 border border-border rounded-md text-foreground hover:bg-muted transition-colors">
+                        Remind me in 7 days
+                    </button>
+                    <button onclick="dismissDonate()" class="flex-1 px-4 py-2 text-muted-foreground hover:text-foreground transition-colors">
+                        Don't show again
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: DonateModal -->
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 z-50 space-y-2">
+        <!-- Toasts will be added here dynamically -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-muted border-t border-border py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-sm text-muted-foreground">Not affiliated with WLU • Beta</p>
+        </div>
+    </footer>
+
+    <script>
+        // TODO: Implement proper state management with Zustand or Context API
+        // Mock data and state management
+        (function() {
+            let sessions = [
+                {
+                    id: "s1",
+                    courseCode: "BU111",
+                    building: "Library",
+                    floor: "2",
+                    capacity: 5,
+                    attendeeCount: 3,
+                    public: true,
+                    endsAt: "in 1h 12m",
+                    host: { name: "Josh S.", initials: "JS" },
+                    notes: "Case prep, quiet please",
+                    area: "Quiet Zone"
+                },
+                {
+                    id: "s2",
+                    courseCode: "CP102",
+                    building: "Science",
+                    floor: "3",
+                    capacity: 4,
+                    attendeeCount: 2,
+                    public: true,
+                    endsAt: "in 2h 45m",
+                    host: { name: "Emily L.", initials: "EL" },
+                    notes: "Python assignment help",
+                    area: "Computer Lab"
+                },
+                {
+                    id: "s3",
+                    courseCode: "MA103",
+                    building: "Peters",
+                    floor: "1",
+                    capacity: 6,
+                    attendeeCount: 6,
+                    public: true,
+                    endsAt: "in 45m",
+                    host: { name: "Mike K.", initials: "MK" },
+                    notes: "Calculus review session",
+                    area: "Group Area"
+                },
+                {
+                    id: "s4",
+                    courseCode: "EC120",
+                    building: "Lazaridis Hall",
+                    floor: "2",
+                    capacity: 3,
+                    attendeeCount: 1,
+                    public: false,
+                    endsAt: "in 3h 20m",
+                    host: { name: "Sarah T.", initials: "ST" },
+                    notes: "Macro econ study",
+                    area: "Study Rooms"
+                },
+                {
+                    id: "s5",
+                    courseCode: "STAT231",
+                    building: "Arts",
+                    floor: "4",
+                    capacity: 5,
+                    attendeeCount: 3,
+                    public: true,
+                    endsAt: "in 1h 55m",
+                    host: { name: "Alex R.", initials: "AR" },
+                    notes: "Final exam prep",
+                    area: "Quiet Zone"
+                },
+                {
+                    id: "s6",
+                    courseCode: "PS101",
+                    building: "Library",
+                    floor: "1",
+                    capacity: 4,
+                    attendeeCount: 2,
+                    public: true,
+                    endsAt: "in 4h 10m",
+                    host: { name: "Jamie P.", initials: "JP" },
+                    notes: "Research methods discussion",
+                    area: "Group Area"
+                }
+            ];
+
+            let joinedSessions = new Set();
+            let hasShownDonateModal = localStorage.getItem('studybuddy_donate_shown') === 'true';
+            let donateSnoozed = localStorage.getItem('studybuddy_donate_snooze');
+            let donateDismissed = localStorage.getItem('studybuddy_donate_dismissed') === 'true';
+
+            window.showPage = function(pageId) {
+                // Hide all pages
+                document.querySelectorAll('[id$="landing"], [id$="sessions"], [id$="host"], [id$="donate"], [id$="moderate"]').forEach(page => {
+                    page.classList.add('hidden');
+                });
+                
+                // Show selected page
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.remove('hidden');
+                }
+
+                // Special handling for sessions page
+                if (pageId === 'sessions') {
+                    renderSessions();
+                }
+            };
+
+            function createSessionCard(session) {
+                const isJoined = joinedSessions.has(session.id);
+                const progressPercent = (session.attendeeCount / session.capacity) * 100;
+                const isFull = session.attendeeCount >= session.capacity;
+                
+                return `
+                    <div class="bg-card rounded-lg border border-border p-6 hover:shadow-md transition-shadow" data-session-id="${session.id}">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="bg-primary text-primary-foreground px-2 py-1 rounded text-sm font-medium">${session.courseCode}</span>
+                                    <span class="bg-muted text-muted-foreground px-2 py-1 rounded text-sm">${session.building} Floor ${session.floor}</span>
+                                    ${!session.public ? '<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Private</span>' : ''}
+                                </div>
+                                <div class="flex items-center space-x-4 text-sm text-muted-foreground">
+                                    <span class="flex items-center space-x-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span>Ends ${session.endsAt}</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-medium">
+                                    ${session.host.initials}
+                                </div>
+                                <button onclick="openReportModal('${session.id}')" class="text-muted-foreground hover:text-foreground p-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium text-foreground">Capacity</span>
+                                <span class="text-sm text-muted-foreground">${session.attendeeCount}/${session.capacity}</span>
+                            </div>
+                            <div class="w-full bg-muted rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full transition-all duration-300" style="width: ${progressPercent}%"></div>
+                            </div>
+                        </div>
+                        
+                        ${session.notes ? `<p class="text-sm text-muted-foreground mb-4 italic">"${session.notes}"</p>` : ''}
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-muted-foreground">Host: ${session.host.name}</span>
+                            <button 
+                                onclick="toggleJoinSession('${session.id}')" 
+                                class="${isJoined ? 'bg-muted text-muted-foreground' : (isFull ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-primary text-primary-foreground hover:opacity-90')} px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                                ${isFull && !isJoined ? 'disabled' : ''}
+                            >
+                                ${isJoined ? 'Leave' : (isFull ? 'Full' : 'Join')}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            window.renderSessions = function() {
+                const courseFilter = document.getElementById('courseFilter').value;
+                const buildingFilter = document.getElementById('buildingFilter').value;
+                const floorFilter = document.getElementById('floorFilter').value;
+                const publicFilter = document.getElementById('publicFilter').checked;
+
+                let filteredSessions = sessions.filter(session => {
+                    if (courseFilter && session.courseCode !== courseFilter) return false;
+                    if (buildingFilter && session.building !== buildingFilter) return false;
+                    if (floorFilter && session.floor !== floorFilter) return false;
+                    if (publicFilter && !session.public) return false;
+                    return true;
+                });
+
+                const grid = document.getElementById('sessionsGrid');
+                const emptyState = document.getElementById('emptyState');
+
+                if (filteredSessions.length === 0) {
+                    grid.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    grid.innerHTML = filteredSessions.map(createSessionCard).join('');
+                }
+            };
+
+            window.filterSessions = function() {
+                renderSessions();
+            };
+
+            window.toggleJoinSession = function(sessionId) {
+                const session = sessions.find(s => s.id === sessionId);
+                if (!session) return;
+
+                const isJoined = joinedSessions.has(sessionId);
+                
+                if (isJoined) {
+                    joinedSessions.delete(sessionId);
+                    session.attendeeCount = Math.max(1, session.attendeeCount - 1);
+                } else {
+                    if (session.attendeeCount >= session.capacity) return;
+                    joinedSessions.add(sessionId);
+                    session.attendeeCount++;
+                    
+                    // Show donate modal on first join if not shown/snoozed/dismissed
+                    if (!hasShownDonateModal && !donateDismissed && (!donateSnoozed || Date.now() > parseInt(donateSnoozed))) {
+                        setTimeout(() => {
+                            document.getElementById('donateModal').classList.remove('hidden');
+                            hasShownDonateModal = true;
+                            localStorage.setItem('studybuddy_donate_shown', 'true');
+                        }, 1000);
+                    }
+                }
+                
+                renderSessions();
+                showToast(isJoined ? 'Left study session' : 'Joined study session successfully!', isJoined ? 'info' : 'success');
+            };
+
+            window.openReportModal = function(sessionId) {
+                window.currentReportSessionId = sessionId;
+                document.getElementById('reportModal').classList.remove('hidden');
+            };
+
+            window.closeModal = function(modalId) {
+                document.getElementById(modalId).classList.add('hidden');
+            };
+
+            window.submitReport = function(event) {
+                event.preventDefault();
+                // TODO: Implement actual report submission to backend
+                console.log('Report submitted for session:', window.currentReportSessionId);
+                closeModal('reportModal');
+                showToast('Thanks — a moderator will review.', 'success');
+            };
+
+            window.snoozeDonate = function() {
+                const snoozeUntil = Date.now() + (7 * 24 * 60 * 60 * 1000); // 7 days
+                localStorage.setItem('studybuddy_donate_snooze', snoozeUntil.toString());
+                closeModal('donateModal');
+                showToast('Reminder set for 7 days', 'info');
+            };
+
+            window.dismissDonate = function() {
+                localStorage.setItem('studybuddy_donate_dismissed', 'true');
+                closeModal('donateModal');
+            };
+
+            window.createSession = function(event) {
+                event.preventDefault();
+                const form = event.target;
+                const formData = new FormData(form);
+                
+                // TODO: Implement form validation and session creation
+                console.log('Creating session with form data');
+                
+                // Hide form, show success
+                document.querySelector('#host .bg-card:first-child').classList.add('hidden');
+                document.getElementById('successState').classList.remove('hidden');
+                
+                showToast('Session created successfully!', 'success');
+            };
+
+            window.showToast = function(message, type = 'info') {
+                const toast = document.createElement('div');
+                const bgColor = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-destructive' : 'bg-primary';
+                
+                toast.className = `${bgColor} text-white px-4 py-3 rounded-md shadow-lg transform transition-all duration-300 translate-x-full opacity-0`;
+                toast.textContent = message;
+                
+                document.getElementById('toastContainer').appendChild(toast);
+                
+                // Animate in
+                setTimeout(() => {
+                    toast.classList.remove('translate-x-full', 'opacity-0');
+                }, 100);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    toast.classList.add('translate-x-full', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            };
+
+            // Initialize the app
+            showPage('landing');
+        })();
+    </script>
+</body>
+</html>
