@@ -140,3 +140,5 @@ export function Donate() {
     </div>
   );
 }
+
+export default Donate;

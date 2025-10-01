@@ -586,3 +586,5 @@ export function Host() {
     </div>
   );
 }
+
+export default Host;

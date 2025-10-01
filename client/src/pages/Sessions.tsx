@@ -110,3 +110,5 @@ export function Sessions() {
     </div>
   );
 }
+
+export default Sessions;

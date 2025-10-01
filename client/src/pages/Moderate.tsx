@@ -157,3 +157,5 @@ export function Moderate() {
     </div>
   );
 }
+
+export default Moderate;
