@@ -5,11 +5,11 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NavBar from "@/components/navbar";
-import Landing from "@/pages/landing";
-import Sessions from "@/pages/sessions";
-import Host from "@/pages/host";
-import Donate from "@/pages/donate";
-import Moderate from "@/pages/moderate";
+import Landing from "@/pages/Landing";
+import Sessions from "@/pages/Sessions";
+import Host from "@/pages/Host";
+import Donate from "@/pages/Donate";
+import Moderate from "@/pages/Moderate";
 import NotFound from "@/pages/not-found";
 import { useStore } from "@/store/useStore";
 
