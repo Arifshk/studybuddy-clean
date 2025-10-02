@@ -5,7 +5,7 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NavBar from "@/components/navbar";
-import Landing from "@/pages/landing";
+import Landing from "@/pages/landing.tsx";
 import Sessions from "@/pages/sessions";
 import Host from "@/pages/host";
 import Donate from "@/pages/donate";

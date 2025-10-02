@@ -15,7 +15,7 @@ export interface Session {
   area?: string;
   duration: number;
   locationImages?: string[]; // Array of image URLs showing the study location
-  scheduledDate?: Date; // Date when the session is scheduled to start
+  scheduledDate?: string; // ISO date string (e.g., YYYY-MM-DD)
   startTime?: string; // Time in HH:MM format when session starts
   isScheduled?: boolean; // Whether this is a scheduled session (true) or immediate session (false)
 }
@@ -45,7 +45,7 @@ export interface CreateSessionData {
   notes?: string;
   public: boolean;
   locationImages?: string[]; // Array of image URLs showing the study location
-  scheduledDate?: Date; // Date when the session is scheduled to start
+  scheduledDate?: string; // ISO date string (e.g., YYYY-MM-DD)
   startTime?: string; // Time in HH:MM format when session starts
   isScheduled?: boolean; // Whether this is a scheduled session (true) or immediate session (false)
 }
